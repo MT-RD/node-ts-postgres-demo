@@ -83,15 +83,21 @@ CREATE TABLE users (
 #### Create entry in `Users table`
 
 ```bash
-curl -H 'Content-Type: application/json'
--d '{"username": "mateo", "email": "mateo@gmail.com"}'
--X POST
+$curl -H 'Content-Type: application/json' \
+-d '{"username": "mateo", "email": "mateo@gmail.com"}' \
+-X POST \
 http://localhost:5000/api/v1/users
+```
+
+We can send JSON data using POST with curl using the `--json` option.
+
+```bash
+$curl --json '{"username": "mateo", "email": "mateo@gmail.com"}' http://localhost:5000/api/v1/users
 ```
 
 #### Get all users
 
 ```bash
-curl -H 'Content-Type: application/json'
+$curl -H 'Content-Type: application/json' \
 http://localhost:5000/api/v1/users
 ```
