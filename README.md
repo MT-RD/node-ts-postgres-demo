@@ -8,13 +8,18 @@
 yarn install
 ```
 
+### Create `.env` file
+
+Rename the file `.env.example` to `.env`
+This step is important to run before running the `prestart` command
+
 ### Run project prestart
 
 ```bash
 yarn prestart
 ```
 
-This will check for the `.env` file and load below environment variables
+This will check for the `.env` file located at the project root level and load below environment variables
 
 ```ts
 POSTGRES_DB: undefined;
