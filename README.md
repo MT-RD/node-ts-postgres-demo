@@ -2,13 +2,30 @@
 
 ## Starting project
 
-Step 1 - Install project dependencies
+### Install project dependencies
 
 ```bash
 yarn install
 ```
 
-Step 2 - Create Postgresql database with Docker command
+### Run project prestart
+
+```bash
+yarn prestart
+```
+
+This will check for the `.env` file and load below environment variables
+
+```ts
+POSTGRES_DB: undefined;
+POSTGRES_HOST: undefined;
+POSTGRES_PASSWORD: undefined;
+POSTGRES_USER: undefined;
+```
+
+## Database Setup
+
+### Create Postgresql database with Docker command
 
 ```bash
 docker run -d \
@@ -20,49 +37,56 @@ docker run -d \
 postgres
 ```
 
-Step 3 - Create `Users Table` from terminal
+### Create `Users Table` from terminal
 
-1.  Get in docker container terminal
+#### Get in docker container terminal
 
 ```bash
 docker exec -it {container_identifier} bash
 ```
 
-2.  Login to Postgres
+The {container_identifier} for Docker is the Container ID for the Docker instance
+You can get it using the below command
+
+```bash
+docker ps
+```
+
+#### Login to Postgres
 
 ```bash
 psql -h localhost -p 5432 -U postgres
 ```
 
-3.  Go to `node-postgres-demo`
+#### Go to `node-postgres-demo`
 
 ```bash
 \c node-postgres-demo
 ```
 
-4.  Create users table
+#### Create users table
 
 ```bash
-CREATE TABLE users ( \
- id SERIAL PRIMARY KEY, \
- username VARCHAR(80), \
- email VARCHAR(255), \
- created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP \
+CREATE TABLE users (
+ id SERIAL PRIMARY KEY,
+ username VARCHAR(80),
+ email VARCHAR(255),
+ created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
  );
 ```
 
-Step 4 - Create entry in `Users table`
+#### Create entry in `Users table`
 
 ```bash
-curl -H 'Content-Type: application/json' \
--d '{"username": "mateo", "email": "mateo@gmail.com"}' \
--X POST \
+curl -H 'Content-Type: application/json'
+-d '{"username": "mateo", "email": "mateo@gmail.com"}'
+-X POST
 http://localhost:5000/api/v1/users
 ```
 
-Step 4 - Get all users
+#### Get all users
 
 ```bash
-curl -H 'Content-Type: application/json' \
+curl -H 'Content-Type: application/json'
 http://localhost:5000/api/v1/users
 ```
